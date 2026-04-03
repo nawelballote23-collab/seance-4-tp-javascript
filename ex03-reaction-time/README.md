@@ -20,7 +20,7 @@ Les **deux variables clés** :
 | Variable  | Rôle                                                                                                                          |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `greenAt` | Horodatage en ms quand la zone **devient** verte (`0` = « pas encore vert » ou « déjà traité »).                              |
-| `to`      | Valeur retournée par `setTimeout` : sert à `**clearTimeout`** si la manche est annulée (trop tôt, nouvelle manche, touche R). |
+| `to`      | Valeur retournée par `setTimeout` : sert à **`clearTimeout`** si la manche est annulée (trop tôt, nouvelle manche, touche R). |
 
 
 Sans `to`, tu ne peux pas annuler le délai : un ancien timer pourrait encore passer au vert alors qu’une nouvelle manche a commencé.
@@ -33,8 +33,8 @@ Sans `to`, tu ne peux pas annuler le délai : un ancien timer pourrait encore pa
 | #          | Type        | Quoi                                                                                                                                                                                                                                          |
 | ---------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Trou 1** | À compléter | Corriger le **sélecteur** de `msEl` : l’`id` dans le HTML utilise un **tiret** (`resultat-ms`). En CSS/JS, `#resultat-ms` est valide ; un mauvais caractère fait que `querySelector` renvoie `null` et le script plante au premier affichage. |
-| **Trou 2** | À compléter | Dans le **callback** du `setTimeout` (au moment où la zone passe au vert), enregistrer l’instant avec `**Date.now()`** — pas `0`, sinon la condition `greenAt > 0` au clic reste fausse.                                                      |
-| **Bug 1**  | À corriger  | La touche **Espace** : pour un `keydown`, `event.key` vaut souvent `**' '`** (un espace), pas la chaîne `'Space'`. Dans **certains** environnements, `event.key === 'Space'` peut être vrai — mais ce n’est **pas fiable partout** (navigateur, OS, disposition clavier). Ne te contente pas d’une seule condition qui marche « chez toi » : combine plutôt **`event.code === 'Space'`** et/ou **`event.key === ' '`** (voir extrait ci-dessous). |
+| **Trou 2** | À compléter | Dans le **callback** du `setTimeout` (au moment où la zone passe au vert), enregistrer l’instant avec **`Date.now()`** — pas `0`, sinon la condition `greenAt > 0` au clic reste fausse.                                                      |
+| **Bug 1**  | À corriger  | La touche **Espace** : pour un `keydown`, `event.key` vaut souvent **`' '`** (un espace), pas la chaîne `'Space'`. Dans **certains** environnements, `event.key === 'Space'` peut être vrai — mais ce n’est **pas fiable partout** (navigateur, OS, disposition clavier). Ne te contente pas d’une seule condition qui marche « chez toi » : combine plutôt **`event.code === 'Space'`** et/ou **`event.key === ' '`** (voir extrait ci-dessous). |
 | **Bug 2**  | À corriger  | Après un **clic réussi** (temps affiché), **ne pas** appeler `resetEtat()` : cette fonction remet aussi le résultat à « – » et **efface** les millisecondes tout de suite. Remets seulement le **bouton** (classe `vert`, texte d’accueil).   |
 
 
